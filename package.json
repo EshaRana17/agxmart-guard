@@ -1,0 +1,19 @@
+{
+  "name": "agenticmart-guard",
+  "version": "0.1.0",
+  "description": "Stdio MCP proxy that applies a tool policy and logs every decision as JSONL.",
+  "type": "module",
+  "bin": {
+    "agenticmart-guard": "bin/agenticmart-guard.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "node --test"
+  },
+  "license": "MIT",
+  "author": "Esha Sabir",
+  "repository": "github:EshaRana17/agenticmart-guard",
+  "homepage": "https://agenticmart.org"
+}
