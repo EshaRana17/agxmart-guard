@@ -8,7 +8,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
-const BIN = path.join(here, '..', 'bin', 'agenticmart-guard.js');
+const BIN = path.join(here, '..', 'bin', 'agxmart-guard.js');
 const FAKE = path.join(here, 'fixtures', 'fake-server.fixture');
 const sha = (s) => crypto.createHash('sha256').update(s).digest('hex');
 
@@ -88,7 +88,7 @@ function isBlocked(res, text) {
   assert.equal(res.result.isError, true);
   assert.equal(res.error, undefined);
   assert.equal(res.result.content[0].type, 'text');
-  assert.match(res.result.content[0].text, /Blocked by agenticmart-guard/);
+  assert.match(res.result.content[0].text, /Blocked by agxmart-guard/);
   if (text) assert.match(res.result.content[0].text, text);
 }
 
@@ -318,7 +318,7 @@ test('proxy exits with the server exit code', async () => {
 });
 
 test('a server that cannot start is reported', async () => {
-  const s = new Session({}, {}, ['agenticmart-no-such-binary-xyz']);
+  const s = new Session({}, {}, ['agxmart-no-such-binary-xyz']);
   assert.equal(await s.exited, 1);
   assert.match(s.stderr, /could not start server/);
 });

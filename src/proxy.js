@@ -25,7 +25,7 @@ function blockedResult(id, reason) {
     id,
     result: {
       resultType: 'complete',
-      content: [{ type: 'text', text: `Blocked by agenticmart-guard policy: ${reason}` }],
+      content: [{ type: 'text', text: `Blocked by agxmart-guard policy: ${reason}` }],
       isError: true,
     },
   };
@@ -56,7 +56,7 @@ export function runProxy({ policy, log, command }) {
     try {
       log.write(entry);
     } catch (e) {
-      process.stderr.write(`agenticmart-guard: cannot write log, stopping: ${e.message}\n`);
+      process.stderr.write(`agxmart-guard: cannot write log, stopping: ${e.message}\n`);
       killTree(child);
       finish(2);
       throw e;
@@ -67,7 +67,7 @@ export function runProxy({ policy, log, command }) {
 
   child.on('error', (e) => {
     record({ event: 'lifecycle', decision: 'log', reason: `server failed to start: ${e.message}`, rule: 'spawnError' });
-    process.stderr.write(`agenticmart-guard: could not start server: ${e.message}\n`);
+    process.stderr.write(`agxmart-guard: could not start server: ${e.message}\n`);
     finish(1);
   });
   child.on('close', (code, signal) => {
@@ -128,11 +128,11 @@ export function runProxy({ policy, log, command }) {
     try {
       msg = JSON.parse(line);
     } catch {
-      process.stderr.write('agenticmart-guard: dropped a non-JSON line from server stdout\n');
+      process.stderr.write('agxmart-guard: dropped a non-JSON line from server stdout\n');
       return undefined;
     }
     if (Array.isArray(msg)) {
-      process.stderr.write('agenticmart-guard: dropped a batch from server stdout\n');
+      process.stderr.write('agxmart-guard: dropped a batch from server stdout\n');
       return undefined;
     }
     if (msg?.method === 'notifications/tools/list_changed') {
@@ -151,7 +151,7 @@ export function runProxy({ policy, log, command }) {
   }
 
   const overflow = (side) => () => {
-    process.stderr.write(`agenticmart-guard: ${side} sent an oversized line, stopping\n`);
+    process.stderr.write(`agxmart-guard: ${side} sent an oversized line, stopping\n`);
     try {
       record({ event: 'protocol', decision: 'block', reason: `${side} sent an oversized line`, rule: 'parseError' });
     } finally {

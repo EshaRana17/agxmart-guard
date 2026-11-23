@@ -2,10 +2,10 @@ import { loadPolicy } from './policy.js';
 import { DecisionLog } from './log.js';
 import { runProxy } from './proxy.js';
 
-const USAGE = 'usage: agenticmart-guard --policy policy.json --log guard.jsonl -- <server command...>\n';
+const USAGE = 'usage: agxmart-guard --policy policy.json --log guard.jsonl -- <server command...>\n';
 
 function refuse(message) {
-  process.stderr.write(`agenticmart-guard: ${message}\nNo server was started.\n`);
+  process.stderr.write(`agxmart-guard: ${message}\nNo server was started.\n`);
   process.exit(2);
 }
 

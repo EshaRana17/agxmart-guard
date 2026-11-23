@@ -1,13 +1,13 @@
-# agenticmart-guard
+# agxmart-guard
 
-agenticmart-guard is a stdio MCP proxy that sits between a client and one server, applies a tool policy to the traffic passing through it, and logs every decision as JSONL.
+agxmart-guard is a stdio MCP proxy that sits between a client and one server, applies a tool policy to the traffic passing through it, and logs every decision as JSONL.
 
 It has no runtime dependencies and needs Node 20 or newer.
 
 ## Install
 
 ```sh
-npx github:EshaRana17/agenticmart-guard --policy policy.json --log guard.jsonl -- <server command...>
+npx github:EshaRana17/agxmart-guard --policy policy.json --log guard.jsonl -- <server command...>
 ```
 
 ## Usage
@@ -15,7 +15,7 @@ npx github:EshaRana17/agenticmart-guard --policy policy.json --log guard.jsonl -
 Point your MCP client at the guard instead of the server:
 
 ```sh
-agenticmart-guard --policy policy.json --log guard.jsonl -- npx -y some-mcp-server
+agxmart-guard --policy policy.json --log guard.jsonl -- npx -y some-mcp-server
 ```
 
 Policy file (every field is optional, and `allowTools` of `null` means no allow list):
@@ -41,11 +41,11 @@ Policy file (every field is optional, and `allowTools` of `null` means no allow 
 - Arguments under keys that look like secrets (`password`, `token`, `api_key`, `authorization` and similar) are written to the log as `[REDACTED]`.
 - It passes `_meta` through unchanged, so both the 2025-era `initialize` flow and stateless MCP 2026-07-28 requests work.
 
-Real output from a test run with a small fake server, with a policy from `agenticmart-baseline to-policy` plus a deny rule, an argument pattern and `maxIdenticalCalls` of 2. Blocked responses from the guard:
+Real output from a test run with a small fake server, with a policy from `agxmart-baseline to-policy` plus a deny rule, an argument pattern and `maxIdenticalCalls` of 2. Blocked responses from the guard:
 
 ```json
-{"jsonrpc":"2.0","id":5,"result":{"resultType":"complete","content":[{"type":"text","text":"Blocked by agenticmart-guard policy: same tool and arguments already called 2 times, limit is 2"}],"isError":true}}
-{"jsonrpc":"2.0","id":7,"result":{"resultType":"complete","content":[{"type":"text","text":"Blocked by agenticmart-guard policy: tool \"delete_all\" is on the deny list"}],"isError":true}}
+{"jsonrpc":"2.0","id":5,"result":{"resultType":"complete","content":[{"type":"text","text":"Blocked by agxmart-guard policy: same tool and arguments already called 2 times, limit is 2"}],"isError":true}}
+{"jsonrpc":"2.0","id":7,"result":{"resultType":"complete","content":[{"type":"text","text":"Blocked by agxmart-guard policy: tool \"delete_all\" is on the deny list"}],"isError":true}}
 ```
 
 Lines from `guard.jsonl`:
@@ -55,7 +55,7 @@ Lines from `guard.jsonl`:
 {"timestamp":"2026-11-08T11:25:41.132Z","event":"tools/call","tool":"read_file","arguments":{"path":"/home/me/.ssh/id_rsa","api_key":"[REDACTED]"},"decision":"block","reason":"arguments match denied pattern \\.ssh","rule":"denyArgPatterns","requestId":6}
 ```
 
-Turn a log into a report with [agenticmart-replay](https://github.com/EshaRana17/agenticmart-replay).
+Turn a log into a report with [agxmart-replay](https://github.com/EshaRana17/agxmart-replay).
 
 ## Limits
 
@@ -84,4 +84,4 @@ node --test
 
 MIT
 
-Developed by [buildwithesha.web.app](https://buildwithesha.web.app/) for [AgenticMart](https://agenticmart.org)
+Developed by [buildwithesha.web.app](https://buildwithesha.web.app/) for [AGXMart](https://agxmart.com)
